@@ -40,6 +40,18 @@ export async function getChatbotResponse(message: string, context: string = ""):
     return response.choices[0].message.content || "I apologize, but I couldn't generate a response. Please try asking your question differently.";
   } catch (error) {
     console.error("Error getting chatbot response:", error);
+
+    // Check if it's a quota exceeded error
+    if (error?.status === 429) {
+      return "I apologize, but our AI service is currently experiencing high demand. Please try again later or contact support for assistance with your fraud-related questions.";
+    }
+
+    // For model-related errors
+    if (error?.error?.code === "model_not_found") {
+      return "I apologize, but there's a temporary issue with our AI service. In the meantime, you can find fraud prevention resources in our Education Center.";
+    }
+
+    // Generic error
     return "I apologize, but I'm having trouble processing your request right now. Please try again in a moment.";
   }
 }

@@ -64,7 +64,7 @@ export function ChatBot() {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         content:
-          "I apologize, but I'm having trouble processing your request. Please try again later.",
+          "I apologize, but I'm having trouble processing your request. In the meantime, you can find helpful fraud prevention resources in our Education Center.",
         isUser: false,
         timestamp: new Date(),
       };
