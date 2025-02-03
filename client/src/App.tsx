@@ -12,6 +12,7 @@ import Education from "@/pages/education";
 import SuccessStories from "@/pages/success-stories";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { ChatBot } from "@/components/chat-bot";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
         </Switch>
       </main>
       <Footer />
+      <ChatBot />
     </div>
   );
 }
