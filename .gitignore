@@ -1,15 +1,35 @@
+# Dependencies
 node_modules
 dist
 .DS_Store
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Environment variables
 .env
 .env.local
 .env.*.local
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Editor directories
 .vscode/
+.idea/
+
+# Build output
 build/
 coverage/
+
+# Replit specific - make sure these are never committed
+.replit
+.replit/
+.cache/
+.config/
+.upm/
+.breakpoints
+replit.nix
+*replit*
