@@ -12,6 +12,10 @@ import {
   Cell,
 } from "recharts";
 import { useAuth } from "@/hooks/use-auth";
+import { RiskAssessment } from "@/components/risk-assessment";
+import { FraudSimulator } from "@/components/fraud-simulator";
+import { ClaimTracker } from "@/components/claim-tracker";
+import { PreventionTips } from "@/components/prevention-tips";
 
 const fraudStats = {
   monthlyData: [
@@ -40,7 +44,7 @@ export default function Dashboard() {
         Welcome back, {user?.username}
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <Card>
           <CardHeader>
             <CardTitle>Fraud Cases Over Time</CardTitle>
@@ -94,6 +98,16 @@ export default function Dashboard() {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <RiskAssessment />
+        <FraudSimulator />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <ClaimTracker />
+        <PreventionTips />
       </div>
     </div>
   );
