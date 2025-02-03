@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { getFallbackResponse } from "./chatbot-fallback";
 
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
@@ -14,7 +15,7 @@ const openai = new OpenAI({
 export async function getChatbotResponse(message: string, context: string = ""): Promise<string> {
   try {
     if (!OPENAI_API_KEY) {
-      return "Chat functionality is currently unavailable. Please try again later.";
+      return getFallbackResponse(message);
     }
 
     const response = await openai.chat.completions.create({
@@ -37,21 +38,9 @@ export async function getChatbotResponse(message: string, context: string = ""):
       max_tokens: 500
     });
 
-    return response.choices[0].message.content || "I apologize, but I couldn't generate a response. Please try asking your question differently.";
+    return response.choices[0].message.content || getFallbackResponse(message);
   } catch (error) {
     console.error("Error getting chatbot response:", error);
-
-    // Check if it's a quota exceeded error
-    if (error?.status === 429) {
-      return "I apologize, but our AI service is currently experiencing high demand. Please try again later or contact support for assistance with your fraud-related questions.";
-    }
-
-    // For model-related errors
-    if (error?.error?.code === "model_not_found") {
-      return "I apologize, but there's a temporary issue with our AI service. In the meantime, you can find fraud prevention resources in our Education Center.";
-    }
-
-    // Generic error
-    return "I apologize, but I'm having trouble processing your request right now. Please try again in a moment.";
+    return getFallbackResponse(message);
   }
 }
